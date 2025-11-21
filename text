@@ -1,0 +1,51 @@
+// services/api.js
+const API_KEY = 'b1701fa514124c2693e499c62a9ae0b8';
+const BASE_URL = 'https://api.spoonacular.com/recipes';
+
+// Fetch random recipes
+export const fetchRandomRecipes = async (number = 25) => {
+  try {
+    const response = await fetch(`${BASE_URL}/random?number=${number}&apiKey=${API_KEY}`);
+    const data = await response.json();
+    return data.recipes || [];
+  } catch (error) {
+    console.log('Error fetching random recipes:', error);
+    return [];
+  }
+};
+
+// Fetch recipes by category
+export const fetchRecipesByCategory = async (category, number = 25) => {
+  try {
+    const response = await fetch(`${BASE_URL}/random?number=${number}&tags=${category}&apiKey=${API_KEY}`);
+    const data = await response.json();
+    return data.recipes || [];
+  } catch (error) {
+    console.log('Error fetching recipes by category:', error);
+    return [];
+  }
+};
+
+// Search recipes
+export const searchRecipes = async (query, number = 25) => {
+  try {
+    const response = await fetch(`${BASE_URL}/complexSearch?query=${query}&number=${number}&apiKey=${API_KEY}`);
+    const data = await response.json();
+    return data.results || [];
+  } catch (error) {
+    console.log('Error searching recipes:', error);
+    return [];
+  }
+};
+
+// Fetch recipe details by ID
+export const fetchRecipeDetails = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${id}/information?apiKey=${API_KEY}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log('Error fetching recipe details:', error);
+    return null;
+  }
+};
