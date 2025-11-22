@@ -14,4 +14,21 @@ export const strings = {
     Time: 'min * Easy',
     Stars: '★★★☆',
   },
+  Login: {
+    Welcomemsg: 'Welcome Back',
+    msg: 'Log in to continue',
+    LoginBtn: 'Login',
+    SignUpLine: ' Don’t have an account?',
+    SignupBtn: 'Sign Up',
+  },
+  Signup: {
+    Title: 'Create Account',
+    msg: 'Join us Today',
+    SignUpBtn: 'Sign Up',
+    LoginText: 'Already have an account?',
+    LoginBtn: 'Login',
+  },
+  Profile: {
+    alert: 'Cannot edit the screen now, under maintenance',
+  },
 };

@@ -10,7 +10,7 @@ import { icons } from '../assets/Icons/icons';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabs() {
+export default function BottomTabs({ setIsLoggedIn }) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -76,7 +76,6 @@ export default function BottomTabs() {
 
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
@@ -89,7 +88,9 @@ export default function BottomTabs() {
             />
           ),
         }}
-      />
+      >
+        {props => <ProfileScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }
