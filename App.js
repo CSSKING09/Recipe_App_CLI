@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootStack from './src/navigation/RootStack';
 import { fetchRandomRecipes } from './src/api/api';
-import { hideSplash } from 'react-native-splash-view';
+import RNBootSplash from 'react-native-bootsplash'; // <-- new import
 
 function App() {
   const [isReady, setIsReady] = useState(false);
@@ -10,15 +10,14 @@ function App() {
   useEffect(() => {
     const prepareApp = async () => {
       try {
-        // DO NOT CALL showSplash() ❌
         await fetchRandomRecipes();
 
         setIsReady(true);
 
-        hideSplash(); // Hides the RN splash overlay immediately
+        RNBootSplash.hide({ fade: true }); // <-- hide BootSplash smoothly
       } catch (error) {
         console.log('Error loading app:', error);
-        hideSplash();
+        RNBootSplash.hide({ fade: true });
       }
     };
 

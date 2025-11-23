@@ -30,6 +30,7 @@ const StyleLogin = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 1,
     borderColor: '#eee',
+    color: 'black',
   },
 
   button: {

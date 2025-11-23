@@ -17,7 +17,7 @@ import Title from '../../components/common/Title/Title';
 import FeatureRecipe from '../../components/FeaturedRecipe/FeaturedRecipe';
 import PopularCard from '../../components/PopularRecipes/PopularCard';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
     <>
       {/* Status Bar */}
@@ -39,7 +39,7 @@ const HomeScreen = () => {
             >
               <Header title={strings.appName} icon={icons.soup} />
 
-              <SearchBar />
+              <SearchBar onFocus={() => navigation.navigate('Search')} />
 
               <Title text={strings.Featured} />
               <FeatureRecipe />
