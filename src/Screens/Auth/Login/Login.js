@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,14 @@ import { strings } from '../../../strings/Strings';
 const LoginScreen = ({ navigation, setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    Alert.alert(
+      'Notice',
+      'Please sign up first to fill in your details. Only then the profile screen will display your information.',
+      [{ text: 'OK' }],
+    );
+  }, []);
 
   const handleLogin = () => {
     if (!email.trim() || !password.trim()) {

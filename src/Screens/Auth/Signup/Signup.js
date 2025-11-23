@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -9,14 +9,20 @@ import {
 } from 'react-native';
 import StyleSignup from './SignupStyle';
 import { strings } from '../../../strings/Strings';
+import { UserContext } from '../../../Context/UserContext';
 
 const SignupScreen = ({ navigation, setIsLoggedIn }) => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    userName,
+    setUserName,
+    userEmail,
+    setUserEmail,
+    userPassword,
+    setUserPassword,
+  } = useContext(UserContext);
 
   const handleSignup = () => {
-    if (!fullName.trim() || !email.trim() || !password.trim()) {
+    if (!userName.trim() || !userEmail.trim() || !userPassword.trim()) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
@@ -25,31 +31,29 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
 
   return (
     <View style={StyleSignup.container}>
-      {' '}
-      <Text style={StyleSignup.title}>{strings.Signup.Title}</Text>{' '}
+      <Text style={StyleSignup.title}>{strings.Signup.Title}</Text>
       <Text style={StyleSignup.subtitle}>{strings.Signup.msg}</Text>
-      ```
       <TextInput
         placeholder="Full Name"
         placeholderTextColor="#bbb"
         style={StyleSignup.input}
-        value={fullName}
-        onChangeText={setFullName}
+        value={userName}
+        onChangeText={setUserName}
       />
       <TextInput
         placeholder="Email"
         placeholderTextColor="#bbb"
         style={StyleSignup.input}
-        value={email}
-        onChangeText={setEmail}
+        value={userEmail}
+        onChangeText={setUserEmail}
       />
       <TextInput
         placeholder="Password"
         placeholderTextColor="#bbb"
         secureTextEntry
         style={StyleSignup.input}
-        value={password}
-        onChangeText={setPassword}
+        value={userPassword}
+        onChangeText={setUserPassword}
       />
       <TouchableOpacity onPress={handleSignup} style={StyleSignup.button}>
         <Text style={StyleSignup.buttonText}>{strings.Signup.SignUpBtn}</Text>

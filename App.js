@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootStack from './src/navigation/RootStack';
 import { fetchRandomRecipes } from './src/api/api';
-import RNBootSplash from 'react-native-bootsplash'; // <-- new import
+import RNBootSplash from 'react-native-bootsplash';
+import UserProvider from './src/Context/UserContext';
 
 function App() {
   const [isReady, setIsReady] = useState(false);
@@ -27,9 +28,11 @@ function App() {
   if (!isReady) return null;
 
   return (
-    <SafeAreaProvider>
-      <RootStack />
-    </SafeAreaProvider>
+    <UserProvider>
+      <SafeAreaProvider>
+        <RootStack />
+      </SafeAreaProvider>
+    </UserProvider>
   );
 }
 
