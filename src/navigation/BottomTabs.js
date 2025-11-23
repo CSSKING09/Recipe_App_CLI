@@ -76,6 +76,7 @@ export default function BottomTabs({ setIsLoggedIn }) {
 
       <Tab.Screen
         name="Profile"
+        component={ProfileScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
@@ -88,9 +89,7 @@ export default function BottomTabs({ setIsLoggedIn }) {
             />
           ),
         }}
-      >
-        {props => <ProfileScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
-      </Tab.Screen>
+      />
     </Tab.Navigator>
   );
 }

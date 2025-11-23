@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -6,13 +6,17 @@ import {
   TouchableOpacity,
   Pressable,
   Alert,
+  StatusBar,
 } from 'react-native';
 import StyleLogin from './LoginStyle';
 import { strings } from '../../../strings/Strings';
+import { UserContext } from '../../../Context/UserContext';
 
-const LoginScreen = ({ navigation, setIsLoggedIn }) => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { setIsLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     Alert.alert(
@@ -31,38 +35,45 @@ const LoginScreen = ({ navigation, setIsLoggedIn }) => {
   };
 
   return (
-    <View style={StyleLogin.container}>
-      {' '}
-      <Text style={StyleLogin.title}>{strings.Login.Welcomemsg}</Text>{' '}
-      <Text style={StyleLogin.subtitle}>{strings.Login.msg}</Text>
-      ```
-      <TextInput
-        placeholder="Email"
-        placeholderTextColor="#bbb"
-        style={StyleLogin.input}
-        value={email}
-        onChangeText={setEmail}
+    <>
+      <StatusBar
+        backgroundColor="white"
+        barStyle="dark-content"
+        translucent={false}
       />
-      <TextInput
-        placeholder="Password"
-        placeholderTextColor="#bbb"
-        secureTextEntry
-        style={StyleLogin.input}
-        value={password}
-        onChangeText={setPassword}
-      />
-      <TouchableOpacity onPress={handleLogin} style={StyleLogin.button}>
-        <Text style={StyleLogin.buttonText}>{strings.Login.LoginBtn}</Text>
-      </TouchableOpacity>
-      <Pressable onPress={() => navigation.navigate('Signup')}>
-        <Text style={StyleLogin.switchText}>
-          {strings.Login.SignUpLine}
-          <Text style={StyleLogin.switchTextHighlight}>
-            {strings.Login.SignupBtn}
+      <View style={StyleLogin.container}>
+        {' '}
+        <Text style={StyleLogin.title}>{strings.Login.Welcomemsg}</Text>{' '}
+        <Text style={StyleLogin.subtitle}>{strings.Login.msg}</Text>
+        ```
+        <TextInput
+          placeholder="Email"
+          placeholderTextColor="#bbb"
+          style={StyleLogin.input}
+          value={email}
+          onChangeText={setEmail}
+        />
+        <TextInput
+          placeholder="Password"
+          placeholderTextColor="#bbb"
+          secureTextEntry
+          style={StyleLogin.input}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity onPress={handleLogin} style={StyleLogin.button}>
+          <Text style={StyleLogin.buttonText}>{strings.Login.LoginBtn}</Text>
+        </TouchableOpacity>
+        <Pressable onPress={() => navigation.navigate('Signup')}>
+          <Text style={StyleLogin.switchText}>
+            {strings.Login.SignUpLine}
+            <Text style={StyleLogin.switchTextHighlight}>
+              {strings.Login.SignupBtn}
+            </Text>
           </Text>
-        </Text>
-      </Pressable>
-    </View>
+        </Pressable>
+      </View>
+    </>
   );
 };
 

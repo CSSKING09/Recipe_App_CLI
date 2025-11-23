@@ -29,6 +29,11 @@ export const strings = {
     LoginBtn: 'Login',
   },
   Profile: {
-    alert: 'Cannot edit the screen now, under maintenance',
+    name: 'Name:',
+    email: 'Email:',
+    password: 'Password:',
+    loadbtn: 'Load Data from Storage',
+    editbtn: 'Clear all Data',
+    Logoutbtn: 'Logout',
   },
 };

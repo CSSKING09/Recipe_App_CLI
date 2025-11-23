@@ -5,15 +5,14 @@ import SignupScreen from '../Screens/Auth/Signup/Signup';
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = ({ setIsLoggedIn }) => {
+const AuthStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login">
-        {props => <LoginScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
-      </Stack.Screen>
-      <Stack.Screen name="Signup">
-        {props => <SignupScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
-      </Stack.Screen>
+    <Stack.Navigator
+      initialRouteName="Signup"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
     </Stack.Navigator>
   );
 };

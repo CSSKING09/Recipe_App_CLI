@@ -1,15 +1,37 @@
 import React, { useContext, useRef, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Animated,
+  StatusBar,
+} from 'react-native';
 import ProfileStyle from './ProfileStyle';
 import { strings } from '../../strings/Strings';
 import { UserContext } from '../../Context/UserContext';
 import { icons } from '../../assets/Icons/icons';
 
-const ProfileScreen = ({ setIsLoggedIn }) => {
-  const { userName, userEmail, userPassword } = useContext(UserContext);
+const ProfileScreen = () => {
+  const {
+    userName,
+    userEmail,
+    userPassword,
+    loadData,
+    deleteData,
+    setIsLoggedIn,
+  } = useContext(UserContext);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    deleteData();
+  };
+
+  const handleLoadData = () => {
+    loadData();
+  };
+  const handleDeleteData = () => {
+    deleteData();
   };
 
   // Animation refs
@@ -32,37 +54,57 @@ const ProfileScreen = ({ setIsLoggedIn }) => {
   }, []);
 
   return (
-    <View style={ProfileStyle.container}>
-      <Animated.View
-        style={{
-          opacity: fadeAnim,
-          transform: [{ translateY: slideAnim }],
-          width: '90%',
-        }}
-      >
-        <View style={ProfileStyle.profileCard}>
-          <View style={ProfileStyle.profileImageWrapper}>
-            <Image source={icons.soup} style={ProfileStyle.profileImage} />
-          </View>
+    <>
+      <StatusBar
+        backgroundColor="white"
+        barStyle="dark-content"
+        translucent={false}
+      />
+      <View style={ProfileStyle.container}>
+        <Animated.View
+          style={{
+            opacity: fadeAnim,
+            transform: [{ translateY: slideAnim }],
+            width: '90%',
+          }}
+        >
+          <View style={ProfileStyle.profileCard}>
+            <View style={ProfileStyle.profileImageWrapper}>
+              <Image source={icons.soup} style={ProfileStyle.profileImage} />
+            </View>
 
-          <Text style={ProfileStyle.name}>{userName}</Text>
-          <Text style={ProfileStyle.email}>{userEmail}</Text>
-          <Text style={ProfileStyle.email}>{userPassword}</Text>
-          <TouchableOpacity
-            onPress={() => alert(`${strings.Profile.alert}`)}
-            style={ProfileStyle.editBtn}
-          >
-            <Text style={ProfileStyle.editBtnText}>Edit Profile</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleLogout}
-            style={ProfileStyle.logoutBtn}
-          >
-            <Text style={ProfileStyle.logoutText}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-      </Animated.View>
-    </View>
+            <Text style={ProfileStyle.name}>
+              {strings.Profile.name}
+              {userName}
+            </Text>
+            <Text style={ProfileStyle.email}>
+              {strings.Profile.email}
+              {userEmail}
+            </Text>
+            <Text style={ProfileStyle.email}>
+              {strings.Profile.password}
+              {userPassword}
+            </Text>
+            <TouchableOpacity
+              onPress={handleLoadData}
+              style={ProfileStyle.editBtn}
+            >
+              <Text style={ProfileStyle.editBtnText}>
+                {strings.Profile.loadbtn}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleLogout}
+              style={ProfileStyle.logoutBtn}
+            >
+              <Text style={ProfileStyle.logoutText}>
+                {strings.Profile.Logoutbtn}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+      </View>
+    </>
   );
 };
 
